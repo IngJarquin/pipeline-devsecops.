@@ -1,6 +1,7 @@
 import unittest
 from src.app import validate_email
 
+
 class TestSecurityValidations(unittest.TestCase):
 
     def test_valid_emails(self):
