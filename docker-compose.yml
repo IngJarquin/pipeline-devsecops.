@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # Servicio de la Base de Datos Segura
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: secure_postgres_container
+    environment:
+      # Definición de credenciales locales (en producción usarías secretos de GitHub/Vault)
+      POSTGRES_USER: devsec_user
+      POSTGRES_PASSWORD: SuperSecurePassword2026!
+      POSTGRES_DB: secure_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - secure_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data: # Volumen persistente para que los datos no se borren al apagar el contenedor
+
+networks:
+  secure_network: # Red interna aislada para los contenedores
+    driver: bridge
